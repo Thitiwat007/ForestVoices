@@ -43,28 +43,48 @@
 
 .toggle_btn {
     display: none;
-    position: absolute;
+    position: fixed;
     right: 20px;
-    top: 14px;
-    font-size: 28px;
-    color: white;
+    top: 20px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: white;
+    color: #468a4a;
+    font-size: 30px;
+    font-weight: bold;
     cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
 }
 
 .mobile_menu {
     display: none;
     flex-direction: column;
-    width: 100%;
-    background-image: linear-gradient(to right,#69b2f6,#468a4a);
+    position: fixed;
+    right: 20px;
+    top: 90px;
+    width: 200px;
+    background: white;
+    border-radius: 15px;
+    padding: 15px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
     text-align: center;
-    padding: 20px 0;
-    gap: 20px;
+    z-index: 9999;
 }
 
 .mobile_menu a {
-    color: #fff;
+    color: #468a4a;
     font-size: 18px;
     text-decoration: none;
+    padding: 10px 0;
+}
+
+.mobile_menu a:hover {
+    background: #f0f0f0;
 }
 
 @media (max-width: 900px) {
@@ -76,8 +96,7 @@
         display: block;
     }
 }
-
-        
+       
     #chatbot-container {
         position: fixed;
         bottom: 90px;
@@ -218,3 +237,4 @@
 <script src="y.js"></script>
 </body>
 </html>
+
