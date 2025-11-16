@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <title>เสียงจากป่าไม้</title>
+    <style>
+        body{
+            background-color: #ffffff;
+        }
+
+.navbar {
+    width: 100%;
+    background-image: linear-gradient(to right,#69b2f6,#468a4a);
+    padding: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 9999;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+}
+
+.navbar ul li a {
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar ul li a:hover {
+    color: #e8e8e8;
+}
+
+.toggle_btn {
+    display: none;
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: white;
+    color: #468a4a;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.mobile_menu {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    right: 20px;
+    top: 90px;
+    width: 200px;
+    background: white;
+    border-radius: 15px;
+    padding: 15px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    text-align: center;
+    z-index: 9999;
+}
+
+.mobile_menu a {
+    color: #468a4a;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 10px 0;
+}
+
+.mobile_menu a:hover {
+    background: #f0f0f0;
+}
+
+@media (max-width: 900px) {
+    .navbar ul {
+        display: none;
+    }
+
+    .toggle_btn {
+        display: block;
+    }
+}
+       
+    #chatbot-container {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 350px;
+        height: 500px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: 10000;
+    }
+
+    #chat-header {
+        background: #f1f1f1;
+        padding: 12px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    #chat-body {
+        flex: 1;
+        padding: 10px;
+        overflow-y: auto;
+        background: #fafafa;
+    }
+
+    .bot-msg {
+        background: #e7e7e7;
+        padding: 10px;
+        border-radius: 10px;
+        max-width: 80%;
+        margin-bottom: 12px;
+        font-size: 14px;
+    }
+
+    .user-msg {
+        background: #d4ffd4;
+        padding: 10px;
+        border-radius: 10px;
+        max-width: 80%;
+        margin-left: auto;
+        margin-bottom: 12px;
+        font-size: 14px;
+    }
+
+    .chat-button {
+        background: white;
+        border: 1px solid #ddd;
+        padding: 8px 12px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 14px;
+        width: 90%;
+        margin: 5px auto;
+        text-align: left;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    #chat-input-area {
+        display: flex;
+        border-top: 1px solid #ddd;
+    }
+
+    #chat-input {
+        flex: 1;
+        padding: 10px;
+        border: none;
+    }
+
+    #send-btn {
+        width: 50px;
+        border: none;
+        background: #ddd;
+        cursor: pointer;
+    }
+
+    #chat-launcher {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: #5e5e5eff;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 28px;
+        cursor: pointer;
+    }
+
+</style>
+</head>
+<body>
+    <iframe src="banner.html" frameborder="0" style="width:100%;height:650px;" scrolling="no"></iframe>    
+    <div id="chatbot-container">
+  <div id="chat-header">น้องซีน่า</div>
+
+  <div id="chat-body">
+    <div class="bot-msg">
+      สวัสดีค่ะ น้องซีน่ายินดีต้อนรับค่ะ หากมีข้อสงสัยใดๆ สามารถสอบถามได้เลยนะคะ
+    </div>
+
+    <div class="button-group">
+      <button class="chat-button" onclick="startFlow()">เริ่มต้น</button>
+    </div>
+  </div>
+
+  <div id="chat-input-area">
+    <input id="chat-input" type="text" placeholder="ตั้งคำถาม...">
+    <button id="send-btn">➤</button>
+  </div>
+</div>
+
+<div id="chat-launcher">💬</div> 
+    <div class="navbar">
+    <ul class="links">
+        <li><a href="h1.html" target="main">หน้าหลัก</a></li>
+        <li><a href="https://whisp-cloud.xyz" target="main">ระบบเฝ้าระวัง</a></li>
+        <li><a href="contact.html" target="main">ติดต่อ</a></li>
+    </ul>
+
+    <div class="toggle_btn" onclick="toggleMenu()">☰</div>
+</div>
+
+<div id="mobileMenu" class="mobile_menu">
+    <a href="h1.html" target="main">หน้าหลัก</a>
+    <a href="https://whisp-cloud.xyz" target="main">ระบบเฝ้าระวัง</a>
+    <a href="contact.html" target="main">ติดต่อ</a>
+</div>
+
+    <iframe src="home.html" frameborder="0"style="width:100%;height:1600px;" scrolling="no"></iframe>
+    <iframe src="footer.html" frameborder="0"style="width:100%;height:35px;" scrolling="no"></iframe>
+
+<script src="y.js"></script>
+</body>
+</html>
